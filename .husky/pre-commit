@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# pre-commit for frontend
+cd src/ && npm run format && npm run lint -- --fix

@@ -1,0 +1,11 @@
+.cancel__button {
+  background: #ffffff;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  padding: 9px 17px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

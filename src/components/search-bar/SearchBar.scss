@@ -1,0 +1,26 @@
+.search {
+  //   margin: 0 32px;
+
+  .search__items {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    img {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 4px;
+    }
+
+    input {
+      width: 100%;
+      padding: 25px;
+      border: none;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 15px;
+      font-weight: 400;
+      margin-left: 6px;
+    }
+  }
+}

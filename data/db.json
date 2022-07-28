@@ -4,37 +4,43 @@
       "id": 1,
       "name": "Jane Cooper",
       "email": "jane.cooper@example.com",
-      "phone_number": "+38160123456"
+      "phone_number": "+38160123456",
+      "isFavorite": true
     },
     {
       "id": 2,
       "name": "Cody Fisher",
       "email": "cody.fisher@example.com",
-      "phone_number": "+38160123456"
+      "phone_number": "+38160123456",
+      "isFavorite": true
     },
     {
       "id": 3,
       "name": "Esther Howard",
       "email": "esther.howard@example.com",
-      "phone_number": "+38160123456"
+      "phone_number": "+38160123456",
+      "isFavorite": false
     },
     {
       "id": 4,
       "name": "Jenny Wilson",
       "email": "jenny.wilson@example.com",
-      "phone_number": "+38160123456"
+      "phone_number": "+38160123456",
+      "isFavorite": false
     },
     {
       "id": 5,
       "name": "Kristin Watson",
       "email": "kristin.watson@example.com",
-      "phone_number": "+38160123456"
+      "phone_number": "+38160123456",
+      "isFavorite": false
     },
     {
       "id": 6,
       "name": "Jack Williamson",
       "email": "jack.williamson@example.com",
-      "phone_number": "+38160123456"
+      "phone_number": "+38160123456",
+      "isFavorite": true
     }
   ],
   "labels": [
@@ -51,6 +57,7 @@
       "name": "Friends"
     },
     {
+      "name": "Fitness",
       "id": 4
     }
   ]

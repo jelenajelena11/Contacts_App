@@ -3,7 +3,11 @@ import CancelButton from "../../buttons/cancel/CancelButton";
 import DeleteButton from "../../buttons/delete/DeleteButton";
 import "./DeleteContact.scss";
 
-function DeleteContact({ openDeleteDialog, setOpenDeleteDialog }: any) {
+function DeleteContact({
+  openDeleteDialog,
+  setOpenDeleteDialog,
+  deleteContact,
+}: any) {
   return (
     <Dialog open={openDeleteDialog}>
       <div className="dialog__wrapper">
@@ -13,7 +17,7 @@ function DeleteContact({ openDeleteDialog, setOpenDeleteDialog }: any) {
           <p>Are you sure you want to delete this contact?</p>
           <div className="dialog__buttons">
             <CancelButton onClick={() => setOpenDeleteDialog(false)} />
-            <DeleteButton onClick={() => {}} />
+            <DeleteButton onClick={deleteContact} />
           </div>
         </div>
       </div>

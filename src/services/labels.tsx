@@ -11,10 +11,10 @@ export const useLabels = () => {
   return { labelList, getLabels };
 };
 
-export const createLabel = async (data: any) => {
+export const createLabel = async (label: any) => {
   try {
     await axios.post("http://localhost:3001/labels", {
-      name: data.name,
+      name: label,
     });
   } catch (error: any) {
     console.log(error);

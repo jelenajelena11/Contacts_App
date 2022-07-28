@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Contact } from "../interfaces/Contact";
 
 export const useContacts = () => {
   const [contactList, setContactList] = useState<any[]>([]);
@@ -9,6 +10,17 @@ export const useContacts = () => {
   };
 
   return { contactList, getContacts };
+};
+
+export const useContactById = (contactId?: string) => {
+  const [contact, setContact] = useState<Contact>();
+  const getContact = async () => {
+    const contact = await axios.get(
+      `http://localhost:3001/contacts/${contactId}`,
+    );
+    setContact(contact.data);
+  };
+  return { contact, getContact };
 };
 
 export const createContact = async (data: any) => {

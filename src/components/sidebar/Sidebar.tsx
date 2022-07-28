@@ -9,9 +9,9 @@ function Sidebar() {
   const { labelList, getLabels } = useLabels();
 
   const saveLabel = (label: any) => {
-    // console.log(labelName);
-    createLabel(label).then((resp) => {
-      console.log(resp);
+    createLabel(label).then(() => {
+      setOpenCreateLabelDialog(false);
+      getLabels();
     });
   };
 

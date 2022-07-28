@@ -24,7 +24,7 @@ function App() {
           <SearchBar />
           <Routes>
             <Route path="/" element={<ContactList />} />
-            <Route path="/edit-contact" element={<EditContact />} />
+            <Route path="/edit-contact/:id" element={<EditContact />} />
             <Route path="/create-contact" element={<CreateContact />} />
             <Route path="/favorites" element={<Favorites />} />
           </Routes>

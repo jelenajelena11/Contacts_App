@@ -6,12 +6,7 @@ interface Props {
 
 function CancelButton({ onClick = () => {} }: Props) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      onKeyDown={onClick}
-      className="cancel__button"
-    >
+    <button type="button" onClick={onClick} className="cancel__button">
       Cancel
     </button>
   );

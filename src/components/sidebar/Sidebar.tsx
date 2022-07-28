@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { createLabel, useLabels } from "../../services/labels";
 import CreateLabel from "../dialogs/create-label/CreateLabel";
 import "./Sidebar.scss";
 
 function Sidebar() {
   const [openCreateLabelDialog, setOpenCreateLabelDialog] = useState(false);
+  const { labelList, getLabels } = useLabels();
+
+  const saveLabel = (label: any) => {
+    // console.log(labelName);
+    createLabel(label).then((resp) => {
+      console.log(resp);
+    });
+  };
+
+  useEffect(() => {
+    getLabels();
+  }, []);
 
   return (
     <div className="sidebar">
@@ -41,27 +54,35 @@ function Sidebar() {
           <span>Labels</span>
           <hr />
         </div>
-        <button className="sidebar__item" type="button">
+        {/* <button className="sidebar__item" type="button">
           <div className="sidebar__item_left">
             <img src="./img/labels_icon.svg" alt="contacts" />
             <span>Work</span>
           </div>
           <span>6</span>
-        </button>
-        <button className="sidebar__item" type="button">
+        </button> */}
+        {/* <button className="sidebar__item" type="button">
           <div className="sidebar__item_left">
             <img src="./img/labels_icon.svg" alt="contacts" />
             <span>Family</span>
           </div>
           <span>3</span>
-        </button>
-        <button className="sidebar__item" type="button">
+        </button> */}
+        {/* <button className="sidebar__item" type="button">
           <div className="sidebar__item_left">
             <img src="./img/labels_icon.svg" alt="contacts" />
             <span>Friends</span>
           </div>
           <span>1</span>
-        </button>
+        </button> */}
+        {labelList.map((label: any) => (
+          <button className="sidebar__item" type="button" key={label.id}>
+            <div className="sidebar__item_left">
+              <img src="./img/labels_icon.svg" alt="contacts" />
+              {label.name}
+            </div>
+          </button>
+        ))}
         <button
           className="sidebar__item"
           type="button"
@@ -77,6 +98,7 @@ function Sidebar() {
         <CreateLabel
           setOpenCreateLabelDialog={setOpenCreateLabelDialog}
           openCreateLabelDialog={openCreateLabelDialog}
+          saveLabel={saveLabel}
         />
       )}
     </div>

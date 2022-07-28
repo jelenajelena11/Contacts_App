@@ -6,12 +6,7 @@ interface Props {
 
 function DeleteButton({ onClick = () => {} }: Props) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      onKeyDown={onClick}
-      className="delete__button"
-    >
+    <button type="button" onClick={onClick} className="delete__button">
       Delete
     </button>
   );

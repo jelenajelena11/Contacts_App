@@ -18,6 +18,7 @@ function App() {
             flexDirection: "column",
             flexGrow: "1",
             margin: "0 32px",
+            width: "100%",
           }}
         >
           <SearchBar />

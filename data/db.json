@@ -1,0 +1,57 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Jane Cooper",
+      "email": "jane.cooper@example.com",
+      "phone_number": "+38160123456"
+    },
+    {
+      "id": 2,
+      "name": "Cody Fisher",
+      "email": "cody.fisher@example.com",
+      "phone_number": "+38160123456"
+    },
+    {
+      "id": 3,
+      "name": "Esther Howard",
+      "email": "esther.howard@example.com",
+      "phone_number": "+38160123456"
+    },
+    {
+      "id": 4,
+      "name": "Jenny Wilson",
+      "email": "jenny.wilson@example.com",
+      "phone_number": "+38160123456"
+    },
+    {
+      "id": 5,
+      "name": "Kristin Watson",
+      "email": "kristin.watson@example.com",
+      "phone_number": "+38160123456"
+    },
+    {
+      "id": 6,
+      "name": "Jack Williamson",
+      "email": "jack.williamson@example.com",
+      "phone_number": "+38160123456"
+    }
+  ],
+  "labels": [
+    {
+      "id": 1,
+      "name": "Work"
+    },
+    {
+      "id": 2,
+      "name": "Family"
+    },
+    {
+      "id": 3,
+      "name": "Friends"
+    },
+    {
+      "id": 4
+    }
+  ]
+}

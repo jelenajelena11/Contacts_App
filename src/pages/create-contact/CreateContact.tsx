@@ -1,15 +1,17 @@
 import FormItem from "../../components/forms/FormItem";
+import { Contact } from "../../interfaces/Contact";
+import { saveNewContact } from "../../services/contact";
 
 function CreateContact() {
-  const createContact = (values: any, event: any) => {
-    console.log("values", values);
-    event.preventDefault();
-    console.log("values", values);
+  const createContact = (values: any) => {
+    // event.preventDefault();
+    // console.log("values", values);
+    saveNewContact(values);
   };
   return (
     <FormItem
       title="Create contact"
-      handleSubmit={(values: any, event: any) => createContact(values, event)}
+      handleSubmit={(values: Contact) => createContact(values)}
     />
   );
 }

@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 // import ContactItem from "../../components/contact-item/ContactItem";
 import { useNavigate } from "react-router-dom";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+// import Table from "@mui/material/Table";
+// import TableBody from "@mui/material/TableBody";
+// import TableCell from "@mui/material/TableCell";
+// import TableContainer from "@mui/material/TableContainer";
+// import TableHead from "@mui/material/TableHead";
+// import TableRow from "@mui/material/TableRow";
+// import Paper from "@mui/material/Paper";
 import DeleteContact from "../../components/dialogs/delete-contact/DeleteContact";
-import { Contact } from "../../interfaces/Contact";
+// import { Contact } from "../../interfaces/Contact";
 import { useContacts } from "../../services/contact";
+import TableComponent from "../../components/table/TableComponent";
 
 function ContactList() {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
@@ -25,9 +26,9 @@ function ContactList() {
 
   const deleteContact = () => {};
 
-  const setToFavorites = (id: number) => {
-    console.log(id);
-  };
+  // const setToFavorites = (id: number) => {
+  //   console.log(id);
+  // };
 
   useEffect(() => {
     getContacts();
@@ -48,7 +49,13 @@ function ContactList() {
           />
         </div>
       ))} */}
-      <TableContainer component={Paper} style={{ marginTop: "20px" }}>
+      <TableComponent
+        title="Contacts"
+        setOpenDeleteDialog={() => setOpenDeleteDialog(true)}
+        contacts={contactList}
+        navigateToEdit={navigateToEdit}
+      />
+      {/* <TableContainer component={Paper} style={{ marginTop: "20px" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow style={{ background: "#F9FAFB" }}>
@@ -104,7 +111,7 @@ function ContactList() {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer> */}
 
       {openDeleteDialog && (
         <DeleteContact

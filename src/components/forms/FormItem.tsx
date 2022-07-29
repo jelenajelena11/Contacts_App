@@ -12,7 +12,7 @@ function FormItem({ title, handleSubmit }: Props) {
   const [values, setValues] = useState({
     name: "",
     email: "",
-    phone: "",
+    phone_number: "",
   });
 
   const handleChange = (event: any) => {
@@ -69,14 +69,18 @@ function FormItem({ title, handleSubmit }: Props) {
         <span>Phone number:</span>
         <input
           type="text"
-          name="phone"
+          name="phone_number"
           onChange={handleChange}
-          value={values.phone}
+          value={values.phone_number}
         />
       </label>
       <div className="form-item__buttons">
         <CancelButton onClick={() => {}} />
-        <Button buttonText="Create" onClick={handleSubmit} type="submit" />
+        <Button
+          buttonText="Create"
+          onClick={() => handleSubmit(values)}
+          type="button"
+        />
       </div>
     </form>
   );

@@ -1,6 +1,7 @@
 import Dialog from "@mui/material/Dialog";
-import CancelButton from "../../buttons/cancel/CancelButton";
-import DeleteButton from "../../buttons/delete/DeleteButton";
+import Button from "../../buttons/button/Button";
+// import CancelButton from "../../buttons/cancel/CancelButton";
+// import DeleteButton from "../../buttons/delete/DeleteButton";
 import "./DeleteContact.scss";
 
 function DeleteContact({
@@ -16,8 +17,14 @@ function DeleteContact({
           <h3>Delete contact</h3>
           <p>Are you sure you want to delete this contact?</p>
           <div className="dialog__buttons">
-            <CancelButton onClick={() => setOpenDeleteDialog(false)} />
-            <DeleteButton onClick={deleteContact} />
+            {/* <CancelButton onClick={() => setOpenDeleteDialog(false)} /> */}
+            <Button
+              onClick={() => setOpenDeleteDialog(false)}
+              buttonText="Cancel"
+              type="button"
+            />
+            {/* <DeleteButton onClick={deleteContact} /> */}
+            <Button onClick={deleteContact} buttonText="Delete" type="button" />
           </div>
         </div>
       </div>

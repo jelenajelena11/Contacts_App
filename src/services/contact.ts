@@ -23,7 +23,7 @@ export const useContactById = (contactId?: string) => {
   return { contact, getContact };
 };
 
-export const createContact = async (data: any) => {
+export const saveNewContact = async (data: any) => {
   try {
     await axios.post("http://localhost:3001/contacts", {
       name: data.name,

@@ -12,7 +12,7 @@ export default function Button({
   type,
 }: Props) {
   return (
-    <button onClick={onClick} type={type} className="button">
+    <button onClick={onClick} type={type} className="blue__button">
       {buttonText}
     </button>
   );

@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { getContactsByLabelName, useContacts } from "../../services/contact";
+import { useFavorites } from "../../services/favorites";
 import { createLabel, useLabels } from "../../services/labels";
 import CreateLabel from "../dialogs/create-label/CreateLabel";
+import SidebarItem from "../sidebar-item/SidebarItem";
 import "./Sidebar.scss";
 
 function Sidebar() {
   const [openCreateLabelDialog, setOpenCreateLabelDialog] = useState(false);
   const { labelList, getLabels } = useLabels();
+  const { contactList, getContacts } = useContacts();
+  const { favoriteList, getFavorites } = useFavorites();
 
   const saveLabel = (label: any) => {
     createLabel(label).then(() => {
@@ -15,8 +20,14 @@ function Sidebar() {
     });
   };
 
+  const showContactsBasedOnLabel = (name: string) => {
+    getContactsByLabelName(name);
+  };
+
   useEffect(() => {
     getLabels();
+    getContacts();
+    getFavorites();
   }, []);
 
   return (
@@ -34,54 +45,37 @@ function Sidebar() {
         </Link>
       </div>
       <div className="sidebar__items">
-        <Link to="/" className="sidebar__link">
-          <button className="sidebar__item active" type="button">
-            <div className="sidebar__item_left">
-              <img src="./img/contact_icon.svg" alt="contacts" />
-              <span>Contacts</span>
-            </div>
-          </button>
-        </Link>
+        <NavLink to="/" className="sidebar__link">
+          <SidebarItem
+            sideImage="./img/contact_icon.svg"
+            title="Contacts"
+            itemNumber={contactList.length}
+            onClick={() => {}}
+          />
+        </NavLink>
         <Link to="favorites" className="sidebar__link">
-          <button className="sidebar__item" type="button">
-            <div className="sidebar__item_left">
-              <img src="./img/star_icon.svg" alt="contacts" />
-              <span>Favorites</span>
-            </div>
-          </button>
+          <SidebarItem
+            sideImage="./img/star_icon.svg"
+            title="Favorites"
+            itemNumber={favoriteList.length}
+            onClick={() => {}}
+          />
         </Link>
         <div className="sidebar__labels">
           <span>Labels</span>
           <hr />
         </div>
-        {/* <button className="sidebar__item" type="button">
-          <div className="sidebar__item_left">
-            <img src="./img/labels_icon.svg" alt="contacts" />
-            <span>Work</span>
-          </div>
-          <span>6</span>
-        </button> */}
-        {/* <button className="sidebar__item" type="button">
-          <div className="sidebar__item_left">
-            <img src="./img/labels_icon.svg" alt="contacts" />
-            <span>Family</span>
-          </div>
-          <span>3</span>
-        </button> */}
-        {/* <button className="sidebar__item" type="button">
-          <div className="sidebar__item_left">
-            <img src="./img/labels_icon.svg" alt="contacts" />
-            <span>Friends</span>
-          </div>
-          <span>1</span>
-        </button> */}
         {labelList.map((label: any) => (
-          <button className="sidebar__item" type="button" key={label.id}>
-            <div className="sidebar__item_left">
-              <img src="./img/labels_icon.svg" alt="contacts" />
-              {label.name}
-            </div>
-          </button>
+          // <div key={label.id}>
+          <Link to="/" key={label.id} className="sidebar__link">
+            <SidebarItem
+              sideImage="./img/labels_icon.svg"
+              title={label.name}
+              itemNumber={label.contacts.length}
+              onClick={() => showContactsBasedOnLabel(label.name)}
+            />
+          </Link>
+          // </div>
         ))}
         <button
           className="sidebar__item"

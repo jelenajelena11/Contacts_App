@@ -5,7 +5,6 @@ import ContactList from "./pages/all-contacts/ContactList";
 import CreateContact from "./pages/create-contact/CreateContact";
 import EditContact from "./pages/edit-contact/EditContact";
 import Favorites from "./pages/favorites/Favorites";
-// import Home from "./pages/home/Home";
 
 function App() {
   return (

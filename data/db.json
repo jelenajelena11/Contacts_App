@@ -5,60 +5,137 @@
       "name": "Jane Cooper",
       "email": "jane.cooper@example.com",
       "phone_number": "+38160123456",
-      "isFavorite": true
+      "isFavorite": true,
+      "profile_photo": "https://i.picsum.photos/id/680/200/300.jpg?hmac=OUdNxaSLxw8SgCxALPFPfZAurK6KVGLpU3hzbCrumJc",
+      "label": {
+        "id": 1,
+        "name": "Work"
+      }
     },
     {
       "id": 2,
       "name": "Cody Fisher",
       "email": "cody.fisher@example.com",
       "phone_number": "+38160123456",
-      "isFavorite": true
+      "isFavorite": true,
+      "profile_photo": "https://i.picsum.photos/id/680/200/300.jpg?hmac=OUdNxaSLxw8SgCxALPFPfZAurK6KVGLpU3hzbCrumJc",
+      "label": {
+        "id": 2,
+        "name": "Family"
+      }
     },
     {
       "id": 3,
       "name": "Esther Howard",
       "email": "esther.howard@example.com",
       "phone_number": "+38160123456",
-      "isFavorite": false
+      "isFavorite": false,
+      "profile_photo": "https://i.picsum.photos/id/680/200/300.jpg?hmac=OUdNxaSLxw8SgCxALPFPfZAurK6KVGLpU3hzbCrumJc",
+      "label": {
+        "id": 1,
+        "name": "Work"
+      }
     },
     {
       "id": 4,
       "name": "Jenny Wilson",
       "email": "jenny.wilson@example.com",
       "phone_number": "+38160123456",
-      "isFavorite": false
+      "isFavorite": false,
+      "profile_photo": "https://i.picsum.photos/id/680/200/300.jpg?hmac=OUdNxaSLxw8SgCxALPFPfZAurK6KVGLpU3hzbCrumJc",
+      "label": {
+        "id": 3,
+        "name": "Friends"
+      }
     },
     {
       "id": 5,
       "name": "Kristin Watson",
       "email": "kristin.watson@example.com",
       "phone_number": "+38160123456",
-      "isFavorite": false
+      "isFavorite": false,
+      "profile_photo": "https://i.picsum.photos/id/208/200/200.jpg?hmac=J1BdqRgAAAId9wernbPINrW38haBGOtrpEqn3m2wjlY",
+      "label": {
+        "id": 3,
+        "name": "Friends"
+      }
     },
     {
       "id": 6,
       "name": "Jack Williamson",
       "email": "jack.williamson@example.com",
       "phone_number": "+38160123456",
-      "isFavorite": true
+      "isFavorite": true,
+      "profile_photo": "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+      "label": {
+        "id": 2,
+        "name": "Family"
+      }
     }
   ],
   "labels": [
     {
       "id": 1,
-      "name": "Work"
+      "name": "Work",
+      "contacts": [
+        {
+          "id": 1,
+          "name": "Jane Cooper",
+          "email": "jane.cooper@example.com",
+          "phone_number": "+38160123456",
+          "isFavorite": true,
+          "profile_photo": "https://i.picsum.photos/id/680/200/300.jpg?hmac=OUdNxaSLxw8SgCxALPFPfZAurK6KVGLpU3hzbCrumJc"
+        },
+        {
+          "id": 3,
+          "name": "Esther Howard",
+          "email": "esther.howard@example.com",
+          "phone_number": "+38160123456",
+          "isFavorite": false,
+          "profile_photo": "https://i.picsum.photos/id/680/200/300.jpg?hmac=OUdNxaSLxw8SgCxALPFPfZAurK6KVGLpU3hzbCrumJc"
+        }
+      ]
     },
     {
       "id": 2,
-      "name": "Family"
+      "name": "Family",
+      "contacts": [
+        {
+          "id": 2,
+          "name": "Cody Fisher",
+          "email": "cody.fisher@example.com",
+          "phone_number": "+38160123456",
+          "isFavorite": true,
+          "profile_photo": "https://i.picsum.photos/id/680/200/300.jpg?hmac=OUdNxaSLxw8SgCxALPFPfZAurK6KVGLpU3hzbCrumJc"
+        },
+        {
+          "id": 6,
+          "name": "Jack Williamson",
+          "email": "jack.williamson@example.com",
+          "phone_number": "+38160123456",
+          "isFavorite": true,
+          "profile_photo": "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U"
+        }
+      ]
     },
     {
       "id": 3,
-      "name": "Friends"
+      "name": "Friends",
+      "contacts": [
+        {
+          "id": 4,
+          "name": "Jenny Wilson",
+          "email": "jenny.wilson@example.com",
+          "phone_number": "+38160123456",
+          "isFavorite": false,
+          "profile_photo": "https://i.picsum.photos/id/680/200/300.jpg?hmac=OUdNxaSLxw8SgCxALPFPfZAurK6KVGLpU3hzbCrumJc"
+        }
+      ]
     },
     {
       "name": "Fitness",
-      "id": 4
+      "id": 4,
+      "contacts": []
     }
   ]
 }

@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Label } from "../../interfaces/Label";
+import { useLabels } from "../../services/labels";
 import Button from "../buttons/button/Button";
 import CancelButton from "../buttons/cancel/CancelButton";
 import "./FormItem.scss";
@@ -13,15 +15,34 @@ function FormItem({ title, handleSubmit }: Props) {
     name: "",
     email: "",
     phone_number: "",
+    label: { id: "", name: "" },
   });
+  const { labelList, getLabels } = useLabels();
+  const [te, setTe] = useState();
 
   const handleChange = (event: any) => {
+    console.log(event.target.value);
     const newItemState = {
       ...values,
       [event.target.name]: event.target.value,
     };
     setValues(newItemState);
+    console.log(newItemState);
   };
+
+  const handleFile = (e: any) => {
+    const { profilePhoto } = e.target.files[0].name;
+    console.log(profilePhoto);
+  };
+
+  const handleSelectChange = (event: any) => {
+    console.log(event.target.value);
+    setTe(event.target.value);
+  };
+
+  useEffect(() => {
+    getLabels();
+  }, []);
 
   // const handleSubmit = (event: any) => {
   //   event.preventDefault();
@@ -35,15 +56,18 @@ function FormItem({ title, handleSubmit }: Props) {
       <div className="form-item__top">
         <div className="form-item__left">
           <img src="" alt="contact" />
-          <button type="button">Change</button>
+          <button onChange={handleFile} type="button">
+            Change
+            <input type="file" style={{ display: "none" }} />
+          </button>
         </div>
         {/* <div className="form-item__labels"> */}
-        <select
-          value="labels"
-          className="form-item__select"
-          onChange={handleChange}
-        >
-          <option value="labels">Labels</option>
+        <select className="form-item__select" onChange={handleSelectChange}>
+          {labelList.map((label: Label) => (
+            <option key={label.id} value={label.name}>
+              {label.name}
+            </option>
+          ))}
         </select>
         {/* </div> */}
       </div>
@@ -78,7 +102,7 @@ function FormItem({ title, handleSubmit }: Props) {
         <CancelButton onClick={() => {}} />
         <Button
           buttonText="Create"
-          onClick={() => handleSubmit(values)}
+          onClick={() => handleSubmit(values, te)}
           type="button"
         />
       </div>

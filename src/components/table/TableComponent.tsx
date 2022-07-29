@@ -44,7 +44,24 @@ function TableComponent({
                   key={c.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                    }}
+                  >
+                    <img
+                      src={c.profile_photo}
+                      alt="profile"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "20px",
+                      }}
+                    />
                     {c.name}
                   </TableCell>
                   <TableCell align="right">{c.email}</TableCell>

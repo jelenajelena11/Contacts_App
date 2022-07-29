@@ -35,6 +35,7 @@
     "react/button-has-type": ["off"],
     "import/no-named-as-default": ["off"],
     "@typescript-eslint/no-shadow": ["off"],
-    "react/require-default-props": ["off"]
+    "react/require-default-props": ["off"],
+    "prefer-template": ["off"]
   }
 }

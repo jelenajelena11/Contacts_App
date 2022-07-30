@@ -36,6 +36,13 @@
     "import/no-named-as-default": ["off"],
     "@typescript-eslint/no-shadow": ["off"],
     "react/require-default-props": ["off"],
-    "prefer-template": ["off"]
+    "prefer-template": ["off"],
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": ["function-declaration", "arrow-function"],
+        "unnamedComponents": "arrow-function"
+      }
+    ]
   }
 }

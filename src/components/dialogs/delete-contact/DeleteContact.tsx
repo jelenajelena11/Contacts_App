@@ -1,30 +1,40 @@
 import Dialog from "@mui/material/Dialog";
-import Button from "../../buttons/button/Button";
-// import CancelButton from "../../buttons/cancel/CancelButton";
-// import DeleteButton from "../../buttons/delete/DeleteButton";
+import Button from "../../buttons/Button";
+import "../../buttons/Button.scss";
 import "./DeleteContact.scss";
+import IllustrationIcon from "../../../assets/Illustration.svg";
+
+interface Props {
+  openDeleteDialog: boolean;
+  closeDialog: any;
+  deleteContact: any;
+}
 
 function DeleteContact({
   openDeleteDialog,
-  setOpenDeleteDialog,
+  closeDialog,
   deleteContact,
-}: any) {
+}: Props) {
   return (
     <Dialog open={openDeleteDialog}>
       <div className="dialog__wrapper">
-        <img src="./img/Illustration.svg" alt="alert" />
+        <img src={IllustrationIcon} alt="alert" />
         <div className="dialog__content">
           <h3>Delete contact</h3>
           <p>Are you sure you want to delete this contact?</p>
           <div className="dialog__buttons">
-            {/* <CancelButton onClick={() => setOpenDeleteDialog(false)} /> */}
             <Button
-              onClick={() => setOpenDeleteDialog(false)}
+              onClick={closeDialog}
               buttonText="Cancel"
               type="button"
+              className="white__button"
             />
-            {/* <DeleteButton onClick={deleteContact} /> */}
-            <Button onClick={deleteContact} buttonText="Delete" type="button" />
+            <Button
+              onClick={deleteContact}
+              buttonText="Delete"
+              type="button"
+              className="red__button"
+            />
           </div>
         </div>
       </div>

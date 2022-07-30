@@ -6,8 +6,14 @@ import { createLabel, useLabels } from "../../services/labels";
 import CreateLabel from "../dialogs/create-label/CreateLabel";
 import SidebarItem from "../sidebar-item/SidebarItem";
 import "./Sidebar.scss";
+import ContactIcon from "../../assets/contact_icon.svg";
+import PlusIcon from "../../assets/plus_icon.svg";
+import Logo from "../../assets/mark.svg";
+import StarIcon from "../../assets/star_icon.svg";
+import LabelsIcon from "../../assets/labels_icon.svg";
+import PlusGreyIcon from "../../assets/plus_grey_icon.svg";
 
-function Sidebar() {
+function Sidebar({ isDeletedContact, isFavorite }: any) {
   const [openCreateLabelDialog, setOpenCreateLabelDialog] = useState(false);
   const { labelList, getLabels } = useLabels();
   const { contactList, getContacts } = useContacts();
@@ -28,18 +34,18 @@ function Sidebar() {
     getLabels();
     getContacts();
     getFavorites();
-  }, []);
+  }, [isDeletedContact, isFavorite]);
 
   return (
     <div className="sidebar">
       <div className="sidebar__header">
-        <img alt="logo" src="./img/Mark.png" />
+        <img alt="logo" src={Logo} />
         <span>Contacts</span>
       </div>
       <div className="sidebar__create_btn">
         <Link to="create-contact" className="sidebar__link">
           <button type="button">
-            <img src="./img/plus_icon.svg" alt="plus_icon" />
+            <img src={PlusIcon} alt="plus_icon" />
             <span>Create contact</span>
           </button>
         </Link>
@@ -47,7 +53,7 @@ function Sidebar() {
       <div className="sidebar__items">
         <NavLink to="/" className="sidebar__link">
           <SidebarItem
-            sideImage="./img/contact_icon.svg"
+            sideImage={ContactIcon}
             title="Contacts"
             itemNumber={contactList.length}
             onClick={() => {}}
@@ -55,7 +61,7 @@ function Sidebar() {
         </NavLink>
         <Link to="favorites" className="sidebar__link">
           <SidebarItem
-            sideImage="./img/star_icon.svg"
+            sideImage={StarIcon}
             title="Favorites"
             itemNumber={favoriteList.length}
             onClick={() => {}}
@@ -66,16 +72,14 @@ function Sidebar() {
           <hr />
         </div>
         {labelList.map((label: any) => (
-          // <div key={label.id}>
           <Link to="/" key={label.id} className="sidebar__link">
             <SidebarItem
-              sideImage="./img/labels_icon.svg"
+              sideImage={LabelsIcon}
               title={label.name}
               itemNumber={label.contacts.length}
               onClick={() => showContactsBasedOnLabel(label.name)}
             />
           </Link>
-          // </div>
         ))}
         <button
           className="sidebar__item"
@@ -83,7 +87,7 @@ function Sidebar() {
           onClick={() => setOpenCreateLabelDialog(true)}
         >
           <div className="sidebar__item_left">
-            <img src="./img/plus_grey_icon.svg" alt="plus" />
+            <img src={PlusGreyIcon} alt="plus" />
             <span>Create Label</span>
           </div>
         </button>

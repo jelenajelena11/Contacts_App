@@ -1,7 +1,6 @@
 import Dialog from "@mui/material/Dialog";
 import { useState } from "react";
-import Button from "../../buttons/button/Button";
-import CancelButton from "../../buttons/cancel/CancelButton";
+import Button from "../../buttons/Button";
 import "../delete-contact/DeleteContact.scss";
 
 function CreateLabel({
@@ -23,11 +22,17 @@ function CreateLabel({
             name="labelName"
           />
           <div className="dialog__buttons">
-            <CancelButton onClick={() => setOpenCreateLabelDialog(false)} />
+            <Button
+              buttonText="Cancel"
+              onClick={() => setOpenCreateLabelDialog(false)}
+              type="button"
+              className="white__button"
+            />
             <Button
               buttonText="Save"
               onClick={() => saveLabel(labelName)}
               type="button"
+              className="blue__button"
             />
           </div>
         </div>

@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteContact from "../../components/dialogs/delete-contact/DeleteContact";
-import TableComponent from "../../components/table/TableComponent";
+import { useDeleteDialog } from "../../components/dialogs/delete-contact/useDeleteContact";
 import { useFavorites } from "../../services/favorites";
+import { deleteSelectedContact } from "../../services/contact";
+import TableComponent from "../../components/table/TableComponent";
 
-function Favorites() {
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+function Favorites({ setIsDeletedContact }: any) {
   const { favoriteList, getFavorites } = useFavorites();
+  const { isShowingDelete, toggleDelete, deleteItemId } = useDeleteDialog();
   const navigate = useNavigate();
 
   const navigateToEdit = (id: number) => {
@@ -15,62 +17,30 @@ function Favorites() {
     return id;
   };
 
+  const deleteContact = (id: any) => {
+    deleteSelectedContact(id).then(() => {
+      getFavorites();
+      setIsDeletedContact(true);
+    });
+    toggleDelete(id);
+  };
+
   useEffect(() => {
     getFavorites();
-  }, []);
+  }, [setIsDeletedContact]);
+
   return (
-    // <TableContainer component={Paper} style={{ marginTop: "20px" }}>
-    //   <Table sx={{ minWidth: 650 }} aria-label="simple table">
-    //     <TableHead>
-    //       <TableRow style={{ background: "#F9FAFB" }}>
-    //         <TableCell>Name</TableCell>
-    //         <TableCell align="right">Email</TableCell>
-    //         <TableCell align="right">Phone number</TableCell>
-    //         <TableCell align="right" />
-    //         <TableCell align="right" />
-    //         <TableCell align="right" />
-    //       </TableRow>
-    //     </TableHead>
-    //     <TableBody>
-    //       <TableRow
-    //         key="test"
-    //         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-    //       >
-    //         <TableCell component="th" scope="row">
-    //           test
-    //         </TableCell>
-    //         <TableCell align="right">test</TableCell>
-    //         <TableCell align="right">test</TableCell>
-    //         <TableCell align="right">
-    //           <img
-    //             src="./img/favourite_icon.svg"
-    //             alt="favourite"
-    //             onClick={() => {}}
-    //           />
-    //         </TableCell>
-    //         <TableCell align="right">
-    //           <img src="./img/trash_icon.svg" alt="trash" onClick={() => {}} />
-    //         </TableCell>
-    //         <TableCell>
-    //           <img src="./img/edit_icon.svg" alt="edit" onClick={() => {}} />
-    //         </TableCell>
-    //       </TableRow>
-    //     </TableBody>
-    //   </Table>
-    // </TableContainer>
     <>
       <TableComponent
-        title="Favorites"
-        setOpenDeleteDialog={() => setOpenDeleteDialog(true)}
-        favorites={favoriteList}
-        navigateToEdit={navigateToEdit}
+        data={favoriteList}
+        navigateToEdit={(id: number) => navigateToEdit(id)}
+        toggleDelete={(id: number) => toggleDelete(id)}
       />
-
-      {openDeleteDialog && (
+      {isShowingDelete && (
         <DeleteContact
-          openDeleteDialog={openDeleteDialog}
-          setOpenDeleteDialog={setOpenDeleteDialog}
-          deleteContact={() => {}}
+          openDeleteDialog={isShowingDelete}
+          closeDialog={toggleDelete}
+          deleteContact={() => deleteContact(deleteItemId)}
         />
       )}
     </>

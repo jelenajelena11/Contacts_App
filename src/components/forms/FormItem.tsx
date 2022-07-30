@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Label } from "../../interfaces/Label";
 import { useLabels } from "../../services/labels";
-import Button from "../buttons/button/Button";
-import CancelButton from "../buttons/cancel/CancelButton";
+import Button from "../buttons/Button";
 import "./FormItem.scss";
+import "../buttons/Button.scss";
 
 interface Props {
   title: string;
@@ -99,11 +99,17 @@ function FormItem({ title, handleSubmit }: Props) {
         />
       </label>
       <div className="form-item__buttons">
-        <CancelButton onClick={() => {}} />
+        <Button
+          buttonText="Cancel"
+          onClick={() => {}}
+          type="button"
+          className="white__button"
+        />
         <Button
           buttonText="Create"
           onClick={() => handleSubmit(values, te)}
           type="button"
+          className="blue__button"
         />
       </div>
     </form>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Contact } from "../interfaces/Contact";
 
 export const useContacts = () => {
-  const [contactList, setContactList] = useState<any[]>([]);
+  const [contactList, setContactList] = useState<Contact[]>([]);
   const getContacts = async () => {
     const contacts = await axios.get(
       process.env.REACT_APP_API_URL + `/contacts`,
@@ -14,11 +14,11 @@ export const useContacts = () => {
   return { contactList, getContacts };
 };
 
-export const useContactById = (contactId?: string) => {
-  const [contact, setContact] = useState<Contact>();
+export const useContactById = (contactId?: any) => {
+  const [contact, setContact] = useState<any>();
   const getContact = async () => {
     const contact = await axios.get(
-      `http://localhost:3001/contacts/${contactId}`,
+      process.env.REACT_APP_API_URL + `/contacts/${contactId}`,
     );
     setContact(contact.data);
   };
@@ -40,9 +40,21 @@ export const saveNewContact = async (data: any, label: any) => {
 };
 
 export const getContactsByLabelName = async (name: string) => {
-  const contacts = await axios.get(
-    `http://localhost:3001/contacts?name=${name}`,
-  );
+  await axios.get(`http://localhost:3001/contacts?name=${name}`);
+};
 
-  console.log(contacts);
+export const deleteSelectedContact = async (contactId: number) => {
+  await axios.delete(process.env.REACT_APP_API_URL + `/contacts/${contactId}`);
+};
+
+export const addContactToFavorite = async (contactId: number) => {
+  await axios.patch(process.env.REACT_APP_API_URL + `/contacts/${contactId}`, {
+    isFavorite: true,
+  });
+};
+
+export const deleteContactFromFavorite = async (contactId: number) => {
+  await axios.patch(process.env.REACT_APP_API_URL + `/contacts/${contactId}`, {
+    isFavorite: false,
+  });
 };

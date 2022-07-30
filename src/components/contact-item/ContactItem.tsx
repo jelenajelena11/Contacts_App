@@ -6,6 +6,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import EditIcon from "../../assets/edit_icon.svg";
+import FavoriteIcon from "../../assets/favorite_icon.svg";
+import NotFavoriteIcon from "../../assets/not_favorite_icon.svg";
+import TrashIcon from "../../assets/trash_icon.svg";
 
 interface Props {
   id: number;
@@ -75,31 +79,23 @@ export default function ContactItem({
             <TableCell align="right">
               {isFavorite ? (
                 <img
-                  src="./img/favourite_icon.svg"
+                  src={FavoriteIcon}
                   alt="favourite"
                   onClick={() => {}}
                 />
               ) : (
-                <img
-                  src="./img/not_favorite_icon.svg"
-                  alt="not_favorite"
-                  onClick={() => {}}
-                />
+                <img src={NotFavoriteIcon} alt="not_favorite" onClick={() => {}} />
               )}
             </TableCell>
             <TableCell align="right">
               <img
-                src="./img/trash_icon.svg"
+                src={TrashIcon}
                 alt="trash"
                 onClick={setOpenDeleteDialog}
               />
             </TableCell>
             <TableCell>
-              <img
-                src="./img/edit_icon.svg"
-                alt="edit"
-                onClick={navigateToEdit}
-              />
+              <img src={EditIcon} alt="edit" onClick={navigateToEdit} />
             </TableCell>
           </TableRow>
         </TableBody>

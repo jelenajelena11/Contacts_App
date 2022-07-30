@@ -1,0 +1,13 @@
+.app__container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+
+  .app__right_wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 0 32px;
+    width: 100%;
+  }
+}

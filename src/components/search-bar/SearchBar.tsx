@@ -1,10 +1,11 @@
 import "./SearchBar.scss";
+import LoopIcon from "../../assets/loop_icon.svg";
 
 function SearchBar() {
   return (
     <div className="search">
       <div className="search__items">
-        <img src="./img/loop_icon.svg" alt="loop" />
+        <img src={LoopIcon} alt="loop" />
         <input type="search" placeholder="Search" />
       </div>
     </div>

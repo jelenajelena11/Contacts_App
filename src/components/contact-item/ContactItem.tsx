@@ -78,21 +78,17 @@ export default function ContactItem({
             <TableCell align="right">{phone_number}</TableCell>
             <TableCell align="right">
               {isFavorite ? (
+                <img src={FavoriteIcon} alt="favourite" onClick={() => {}} />
+              ) : (
                 <img
-                  src={FavoriteIcon}
-                  alt="favourite"
+                  src={NotFavoriteIcon}
+                  alt="not_favorite"
                   onClick={() => {}}
                 />
-              ) : (
-                <img src={NotFavoriteIcon} alt="not_favorite" onClick={() => {}} />
               )}
             </TableCell>
             <TableCell align="right">
-              <img
-                src={TrashIcon}
-                alt="trash"
-                onClick={setOpenDeleteDialog}
-              />
+              <img src={TrashIcon} alt="trash" onClick={setOpenDeleteDialog} />
             </TableCell>
             <TableCell>
               <img src={EditIcon} alt="edit" onClick={navigateToEdit} />

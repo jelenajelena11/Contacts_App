@@ -1,5 +1,3 @@
-import { Label } from "./Label";
-
 export interface Contact {
   id?: number;
   name: string;
@@ -7,5 +5,5 @@ export interface Contact {
   phone_number: string;
   isFavorite?: boolean;
   profile_photo: string;
-  label: Label;
+  label: number;
 }

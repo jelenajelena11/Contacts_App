@@ -4,7 +4,7 @@ interface Props {
   buttonText: string;
   onClick: any;
   type: "reset" | "button" | "submit";
-  className: any;
+  className: string;
 }
 
 export default function Button({

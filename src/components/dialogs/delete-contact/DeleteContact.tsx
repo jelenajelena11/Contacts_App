@@ -6,8 +6,8 @@ import IllustrationIcon from "../../../assets/Illustration.svg";
 
 interface Props {
   openDeleteDialog: boolean;
-  closeDialog: any;
-  deleteContact: any;
+  closeDialog: Function;
+  deleteContact: Function;
 }
 
 function DeleteContact({

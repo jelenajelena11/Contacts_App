@@ -2,11 +2,20 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteContact from "../../components/dialogs/delete-contact/DeleteContact";
 import { useDeleteDialog } from "../../components/dialogs/delete-contact/useDeleteContact";
-import { useFavorites } from "../../services/favorites";
-import { deleteSelectedContact } from "../../services/contact";
+import { useFavorites } from "../../services/hooks/useFavorites";
+import {
+  deleteContactFromFavorite,
+  deleteSelectedContact,
+} from "../../services/contact";
 import TableComponent from "../../components/table/TableComponent";
 
-function Favorites({ setIsDeletedContact }: any) {
+interface Props {
+  setIsDeletedContact: Function;
+  setIsFavorite: Function;
+  isFavorite: boolean;
+}
+
+function Favorites({ setIsDeletedContact, setIsFavorite, isFavorite }: Props) {
   const { favoriteList, getFavorites } = useFavorites();
   const { isShowingDelete, toggleDelete, deleteItemId } = useDeleteDialog();
   const navigate = useNavigate();
@@ -17,12 +26,19 @@ function Favorites({ setIsDeletedContact }: any) {
     return id;
   };
 
-  const deleteContact = (id: any) => {
+  const deleteContact = (id: number) => {
     deleteSelectedContact(id).then(() => {
       getFavorites();
       setIsDeletedContact(true);
     });
     toggleDelete(id);
+  };
+
+  const deleteFromFavorite = (id: number) => {
+    deleteContactFromFavorite(id).then(() => {
+      getFavorites();
+      setIsFavorite(!isFavorite);
+    });
   };
 
   useEffect(() => {
@@ -35,6 +51,7 @@ function Favorites({ setIsDeletedContact }: any) {
         data={favoriteList}
         navigateToEdit={(id: number) => navigateToEdit(id)}
         toggleDelete={(id: number) => toggleDelete(id)}
+        deleteFromFavorite={(id: number) => deleteFromFavorite(id)}
       />
       {isShowingDelete && (
         <DeleteContact

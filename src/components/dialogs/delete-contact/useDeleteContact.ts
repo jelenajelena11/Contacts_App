@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const useDeleteDialog = () => {
   const [isShowingDelete, setIsShowingDelete] = useState(false);
-  const [deleteItemId, setDeleteItemId] = useState<number | undefined>();
+  const [deleteItemId, setDeleteItemId] = useState<number>(0);
 
   function toggleDelete(id: number) {
     setIsShowingDelete(!isShowingDelete);

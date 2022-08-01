@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -15,9 +15,9 @@ import "./TableComponent.scss";
 import SearchBar from "../search-bar/SearchBar";
 
 interface Props {
-  data: any;
-  toggleDelete: any;
-  navigateToEdit: any;
+  data: Contact[];
+  toggleDelete: Function;
+  navigateToEdit: Function;
   setToFavorite?: any;
   deleteFromFavorite?: any;
 }
@@ -31,7 +31,7 @@ function TableComponent({
 }: Props) {
   const [searchInput, setSearchInput] = useState("");
 
-  const handleSearchChange = (event: any) => {
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
   };
   return (
@@ -51,7 +51,7 @@ function TableComponent({
           </TableHead>
           <TableBody>
             {data
-              .filter((value: any) => {
+              .filter((value: Contact) => {
                 if (searchInput === "") {
                   return value;
                 }

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Contact } from "../interfaces/Contact";
+import { Contact } from "../../interfaces/Contact";
 
 export const useFavorites = () => {
   const [favoriteList, setFavoriteList] = useState<Contact[]>([]);

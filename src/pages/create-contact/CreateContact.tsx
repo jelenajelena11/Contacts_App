@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { saveNewContact } from "../../services/contact";
-import { useLabels } from "../../services/labels";
-import "../../components/forms/FormItem.scss";
+import { useLabels } from "../../services/hooks/useLabels";
+import "../../components/forms/EditContactItem.scss";
 import Button from "../../components/buttons/Button";
+import { Label } from "../../interfaces/Label";
 
-function CreateContact({ setIsCreated, isCreated }: any) {
+interface Props {
+  setIsCreated: Function;
+  isCreated: boolean;
+}
+
+function CreateContact({ setIsCreated, isCreated }: Props) {
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -15,11 +21,6 @@ function CreateContact({ setIsCreated, isCreated }: any) {
   const { labelList, getLabels } = useLabels();
 
   const handleChange = (event: any) => {
-    // const newItemState = {
-    //   ...values,
-    //   [event.target.name]: event.target.value,
-    // };
-    // setValues(newItemState);
     const { name, value } = event.target;
     setValues((values: any) => ({ ...values, [name]: value }));
   };
@@ -45,12 +46,6 @@ function CreateContact({ setIsCreated, isCreated }: any) {
   }, []);
 
   return (
-    // <FormItem
-    //   title="Create contact"
-    //   handleSubmit={(values: Contact, labelObject: any) =>
-    //     createContact(values, labelObject)
-    //   }
-    // />
     <form className="form-item__container" onSubmit={handleSubmit}>
       <h3>Create Contact</h3>
       <span>Photo</span>
@@ -75,9 +70,9 @@ function CreateContact({ setIsCreated, isCreated }: any) {
           value={values.label}
         >
           <option value="" disabled>
-            Label
+            Labels
           </option>
-          {labelList.map((label: any) => (
+          {labelList.map((label: Label) => (
             <option value={label.id} key={label.id}>
               {label.name}
             </option>

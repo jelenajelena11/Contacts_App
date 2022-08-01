@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteContact from "../../components/dialogs/delete-contact/DeleteContact";
+import { useDeleteDialog } from "../../components/dialogs/delete-contact/useDeleteContact";
+import TableComponent from "../../components/table/TableComponent";
 import {
   addContactToFavorite,
   deleteContactFromFavorite,
   deleteSelectedContact,
+  getContactsByLabel,
 } from "../../services/contact";
-import { useContacts } from "../../services/hooks/useContacts";
-import { useDeleteDialog } from "../../components/dialogs/delete-contact/useDeleteContact";
-import TableComponent from "../../components/table/TableComponent";
 
 interface Props {
   setIsDeletedContact: Function;
@@ -16,13 +16,15 @@ interface Props {
   isFavorite: boolean;
 }
 
-function ContactList({
+function ContactsLabel({
   setIsDeletedContact,
   setIsFavorite,
   isFavorite,
 }: Props) {
-  const { contactList, getContacts } = useContacts();
+  const [contactsByLabel, setContactsByLabel] = useState([]);
   const { isShowingDelete, toggleDelete, deleteItemId } = useDeleteDialog();
+  const { id } = useParams();
+
   const navigate = useNavigate();
 
   const navigateToEdit = (id: number) => {
@@ -31,36 +33,38 @@ function ContactList({
     return id;
   };
 
-  const deleteContact = (id: number) => {
-    deleteSelectedContact(id).then(() => {
-      getContacts();
+  const deleteContact = (contactId: number) => {
+    deleteSelectedContact(contactId).then(() => {
+      getContactsByLabel(id);
       setIsDeletedContact(true);
     });
-    toggleDelete(id);
+    toggleDelete(contactId);
   };
 
-  const setToFavorite = (id: number) => {
-    addContactToFavorite(id).then(() => {
-      getContacts();
+  const setToFavorite = (contactId: number) => {
+    addContactToFavorite(contactId).then(() => {
+      getContactsByLabel(id);
       setIsFavorite(!isFavorite);
     });
   };
 
-  const deleteFromFavorite = (id: number) => {
-    deleteContactFromFavorite(id).then(() => {
-      getContacts();
+  const deleteFromFavorite = (contactId: number) => {
+    deleteContactFromFavorite(contactId).then(() => {
+      getContactsByLabel(id);
       setIsFavorite(!isFavorite);
     });
   };
 
   useEffect(() => {
-    getContacts();
-  }, []);
+    getContactsByLabel(id).then((res) => {
+      setContactsByLabel(res.data);
+    });
+  }, [id, isFavorite]);
 
   return (
     <>
       <TableComponent
-        data={contactList}
+        data={contactsByLabel}
         navigateToEdit={(id: number) => navigateToEdit(id)}
         toggleDelete={(id: number) => toggleDelete(id)}
         setToFavorite={(id: number) => setToFavorite(id)}
@@ -77,4 +81,4 @@ function ContactList({
   );
 }
 
-export default ContactList;
+export default ContactsLabel;

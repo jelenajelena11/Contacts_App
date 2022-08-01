@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { updateContact, useContactById } from "../../services/contact";
-import "../../components/forms/FormItem.scss";
-import FormItem from "../../components/forms/FormItem";
+import { updateContact } from "../../services/contact";
+import { useContactById } from "../../services/hooks/useContacts";
+import EditContactItem from "../../components/forms/EditContactItem";
+import { Contact } from "../../interfaces/Contact";
 
 function EditContact() {
   const { id } = useParams();
   const { contact, getContact } = useContactById(id);
 
-  const handleSubmit = (values: any, event: any, profileImg: any) => {
+  const handleSubmit = (values: Contact, event: Event, profileImg: string) => {
     event.preventDefault();
-    console.log(values);
     updateContact(values, profileImg);
   };
 
@@ -18,7 +18,7 @@ function EditContact() {
     getContact();
   }, []);
 
-  return <FormItem data={contact} handleSubmit={handleSubmit} />;
+  return <EditContactItem data={contact} handleSubmit={handleSubmit} />;
 }
 
 export default EditContact;

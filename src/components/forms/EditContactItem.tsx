@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-import { useLabels } from "../../services/labels";
+import { useLabels } from "../../services/hooks/useLabels";
 import Button from "../buttons/Button";
-import "./FormItem.scss";
+import "./EditContactItem.scss";
 import "../buttons/Button.scss";
+import { Contact } from "../../interfaces/Contact";
+import { Label } from "../../interfaces/Label";
 
-function FormItem({ data, handleSubmit }: any) {
+interface Props {
+  data?: any;
+  handleSubmit: any;
+}
+
+function EditContactItem({ data, handleSubmit }: Props) {
   const { labelList, getLabels } = useLabels();
   const [profileImg, setProfileImg] = useState<any>();
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<Contact>({
     name: data?.name || "",
     email: data?.email || "",
     phone_number: data?.phone_number || "",
     profile_photo: data?.profile_photo || "",
-    label: data?.label || 0,
+    label: data?.labelId || 0,
   });
 
   const handleFile = (e: any) => {
@@ -28,16 +34,11 @@ function FormItem({ data, handleSubmit }: any) {
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
-    setValues((values: any) => ({ ...values, [name]: value }));
-  };
-
-  const cancelEdit = (values: any) => {
-    console.log(values);
+    setValues((values: Contact) => ({ ...values, [name]: value }));
   };
 
   useEffect(() => {
     getLabels();
-    // getLabel();
     setValues(data);
     setProfileImg(data?.profile_photo);
   }, [data]);
@@ -66,7 +67,7 @@ function FormItem({ data, handleSubmit }: any) {
           name="label"
           value={values?.label}
         >
-          {labelList.map((label: any) => (
+          {labelList.map((label: Label) => (
             <option key={label.id} value={label?.id}>
               {label?.name}
             </option>
@@ -103,7 +104,7 @@ function FormItem({ data, handleSubmit }: any) {
       <div className="form-item__buttons">
         <Button
           buttonText="Cancel"
-          onClick={() => cancelEdit(values)}
+          onClick={() => {}}
           type="button"
           className="white__button"
         />
@@ -118,4 +119,4 @@ function FormItem({ data, handleSubmit }: any) {
   );
 }
 
-export default FormItem;
+export default EditContactItem;

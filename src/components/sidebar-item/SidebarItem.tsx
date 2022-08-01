@@ -1,6 +1,19 @@
 import "../sidebar/Sidebar.scss";
 
-function SidebarItem({ sideImage, title, itemNumber, clicked, onClick }: any) {
+interface Props {
+  sideImage: string;
+  title: string;
+  itemNumber: number | undefined;
+  clicked?: boolean;
+  onClick?: any;
+}
+function SidebarItem({
+  sideImage,
+  title,
+  itemNumber,
+  clicked,
+  onClick,
+}: Props) {
   return (
     <div>
       {clicked ? (

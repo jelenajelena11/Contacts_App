@@ -1,13 +1,19 @@
 import Dialog from "@mui/material/Dialog";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Button from "../../buttons/Button";
 import "../delete-contact/DeleteContact.scss";
+
+interface Props {
+  openCreateLabelDialog: boolean;
+  setOpenCreateLabelDialog: Function;
+  saveLabel: Function;
+}
 
 function CreateLabel({
   openCreateLabelDialog,
   setOpenCreateLabelDialog,
   saveLabel,
-}: any) {
+}: Props) {
   const [labelName, setLabelName] = useState("");
 
   return (
@@ -17,7 +23,9 @@ function CreateLabel({
           <h3>Create label</h3>
           <input
             type="text"
-            onChange={(event: any) => setLabelName(event?.target.value)}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              setLabelName(event?.target.value)
+            }
             value={labelName}
             name="labelName"
           />

@@ -1,16 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
 import { Label } from "../interfaces/Label";
-
-export const useLabels = () => {
-  const [labelList, setLabelList] = useState<Label[]>([]);
-  const getLabels = async () => {
-    const labels = await axios.get(process.env.REACT_APP_API_URL + `/labels`);
-    setLabelList(labels.data);
-  };
-
-  return { labelList, getLabels };
-};
 
 export const createLabel = async (label: Label) => {
   try {
@@ -21,15 +10,4 @@ export const createLabel = async (label: Label) => {
   } catch (error: any) {
     console.log(error);
   }
-};
-
-export const useLabelById = (labelId?: any) => {
-  const [label, setLabel] = useState<any>();
-  const getLabel = async () => {
-    const label = await axios.get(
-      process.env.REACT_APP_API_URL + `/labels/${labelId}`,
-    );
-    setLabel(label.data);
-  };
-  return { label, getLabel };
 };

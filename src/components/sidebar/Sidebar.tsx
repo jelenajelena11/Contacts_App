@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { getContactsByLabel, useContacts } from "../../services/contact";
-import { useFavorites } from "../../services/favorites";
-import { createLabel, useLabels } from "../../services/labels";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useContacts } from "../../services/hooks/useContacts";
+import { useFavorites } from "../../services/hooks/useFavorites";
+import { createLabel } from "../../services/labels";
+import { useLabels } from "../../services/hooks/useLabels";
 import CreateLabel from "../dialogs/create-label/CreateLabel";
 import SidebarItem from "../sidebar-item/SidebarItem";
 import "./Sidebar.scss";
@@ -12,19 +13,22 @@ import Logo from "../../assets/mark.svg";
 import StarIcon from "../../assets/star_icon.svg";
 import LabelsIcon from "../../assets/labels_icon.svg";
 import PlusGreyIcon from "../../assets/plus_grey_icon.svg";
+import { Label } from "../../interfaces/Label";
 
-function Sidebar({
-  isDeletedContact,
-  isFavorite,
-  isCreated,
-}: // setContactsByLabel,
-any) {
+interface Props {
+  isDeletedContact: boolean;
+  isFavorite: boolean;
+  isCreated: boolean;
+}
+
+function Sidebar({ isDeletedContact, isFavorite, isCreated }: Props) {
   const [openCreateLabelDialog, setOpenCreateLabelDialog] = useState(false);
   const { labelList, getLabels } = useLabels();
   const { contactList, getContacts } = useContacts();
   const { favoriteList, getFavorites } = useFavorites();
+  const navigate = useNavigate();
 
-  const saveLabel = (label: any) => {
+  const saveLabel = (label: Label) => {
     createLabel(label).then(() => {
       setOpenCreateLabelDialog(false);
       getLabels();
@@ -32,8 +36,9 @@ any) {
   };
 
   const showContactsBasedOnLabel = (id: number) => {
-    const t = getContactsByLabel(id);
-    console.log(t);
+    const path = `/contacts-by-labels/${id}`;
+    navigate(path);
+    return id;
   };
 
   useEffect(() => {
@@ -62,7 +67,6 @@ any) {
             sideImage={ContactIcon}
             title="Contacts"
             itemNumber={contactList.length}
-            onClick={() => {}}
           />
         </NavLink>
         <Link to="favorites" className="sidebar__link">
@@ -70,24 +74,21 @@ any) {
             sideImage={StarIcon}
             title="Favorites"
             itemNumber={favoriteList.length}
-            onClick={() => {}}
           />
         </Link>
         <div className="sidebar__labels">
           <span>Labels</span>
           <hr />
         </div>
-        {labelList.map((label: any) => (
-          // <Link to="" key={label.id} className="sidebar__link">
+        {labelList.map((label: Label) => (
           <div key={label.id} className="sidebar__link">
             <SidebarItem
               sideImage={LabelsIcon}
               title={label.name}
-              itemNumber={label.contacts.length}
+              itemNumber={label.contacts?.length}
               onClick={() => showContactsBasedOnLabel(label.id)}
             />
           </div>
-          // </Link>
         ))}
         <button
           className="sidebar__item"

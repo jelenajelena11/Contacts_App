@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { getContactsByLabelName, useContacts } from "../../services/contact";
+import { getContactsByLabel, useContacts } from "../../services/contact";
 import { useFavorites } from "../../services/favorites";
 import { createLabel, useLabels } from "../../services/labels";
 import CreateLabel from "../dialogs/create-label/CreateLabel";
@@ -13,7 +13,12 @@ import StarIcon from "../../assets/star_icon.svg";
 import LabelsIcon from "../../assets/labels_icon.svg";
 import PlusGreyIcon from "../../assets/plus_grey_icon.svg";
 
-function Sidebar({ isDeletedContact, isFavorite }: any) {
+function Sidebar({
+  isDeletedContact,
+  isFavorite,
+  isCreated,
+}: // setContactsByLabel,
+any) {
   const [openCreateLabelDialog, setOpenCreateLabelDialog] = useState(false);
   const { labelList, getLabels } = useLabels();
   const { contactList, getContacts } = useContacts();
@@ -26,15 +31,17 @@ function Sidebar({ isDeletedContact, isFavorite }: any) {
     });
   };
 
-  const showContactsBasedOnLabel = (name: string) => {
-    getContactsByLabelName(name);
+  const showContactsBasedOnLabel = (id: number) => {
+    const t = getContactsByLabel(id);
+    console.log(t);
+    // setContactsByLabel(t);
   };
 
   useEffect(() => {
     getLabels();
     getContacts();
     getFavorites();
-  }, [isDeletedContact, isFavorite]);
+  }, [isDeletedContact, isFavorite, isCreated]);
 
   return (
     <div className="sidebar">
@@ -72,14 +79,16 @@ function Sidebar({ isDeletedContact, isFavorite }: any) {
           <hr />
         </div>
         {labelList.map((label: any) => (
-          <Link to="/" key={label.id} className="sidebar__link">
+          // <Link to="" key={label.id} className="sidebar__link">
+          <div key={label.id} className="sidebar__link">
             <SidebarItem
               sideImage={LabelsIcon}
               title={label.name}
               itemNumber={label.contacts.length}
-              onClick={() => showContactsBasedOnLabel(label.name)}
+              onClick={() => showContactsBasedOnLabel(label.id)}
             />
-          </Link>
+          </div>
+          // </Link>
         ))}
         <button
           className="sidebar__item"

@@ -37,6 +37,8 @@
     "@typescript-eslint/no-shadow": ["off"],
     "react/require-default-props": ["off"],
     "prefer-template": ["off"],
+    "array-callback-return": ["off"],
+    "consistent-return": ["off"],
     "react/function-component-definition": [
       "error",
       {

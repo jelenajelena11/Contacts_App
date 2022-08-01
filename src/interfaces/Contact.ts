@@ -1,11 +1,11 @@
 import { Label } from "./Label";
 
 export interface Contact {
-  id: number;
+  id?: number;
   name: string;
   email: string;
   phone_number: string;
-  isFavorite: boolean;
+  isFavorite?: boolean;
   profile_photo: string;
   label: Label;
 }

@@ -10,10 +10,17 @@ import {
 import { useDeleteDialog } from "../../components/dialogs/delete-contact/useDeleteContact";
 import TableComponent from "../../components/table/TableComponent";
 
-function ContactList({ setIsDeletedContact, setIsFavorite, isFavorite }: any) {
+function ContactList({
+  setIsDeletedContact,
+  setIsFavorite,
+  isFavorite,
+  contactsByLabel,
+}: any) {
   const { contactList, getContacts } = useContacts();
   const { isShowingDelete, toggleDelete, deleteItemId } = useDeleteDialog();
   const navigate = useNavigate();
+
+  console.log(contactsByLabel);
 
   const navigateToEdit = (id: number) => {
     const path = `/edit-contact/${id}`;
@@ -32,7 +39,7 @@ function ContactList({ setIsDeletedContact, setIsFavorite, isFavorite }: any) {
   const setToFavorite = (id: number) => {
     addContactToFavorite(id).then(() => {
       getContacts();
-      setIsFavorite(true);
+      setIsFavorite(!isFavorite);
     });
   };
 

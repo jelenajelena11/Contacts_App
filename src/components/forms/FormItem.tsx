@@ -1,46 +1,57 @@
 import { useEffect, useState } from "react";
-import { Label } from "../../interfaces/Label";
+import { useNavigate } from "react-router-dom";
+// import { Label } from "../../interfaces/Label";
 import { useLabels } from "../../services/labels";
 import Button from "../buttons/Button";
 import "./FormItem.scss";
 import "../buttons/Button.scss";
 
-interface Props {
-  title: string;
-  handleSubmit: any;
-}
+// interface Props {
+//   title: string;
+//   handleSubmit: any;
+// }
 
-function FormItem({ title, handleSubmit }: Props) {
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    phone_number: "",
-    label: { id: "", name: "" },
-  });
+function FormItem({ data, handleSubmit }: any) {
+  console.log(data);
+  // const { id } = useParams();
+  // const { contact, getContact } = useContactById(id);
   const { labelList, getLabels } = useLabels();
-  const [te, setTe] = useState();
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    name: data?.name || "",
+    email: data?.email || "",
+    phone_number: data?.phone_number || "",
+    profile_photo: data?.profile_photo || "",
+    label: data?.label || 0,
+  });
 
-  const handleChange = (event: any) => {
-    console.log(event.target.value);
-    const newItemState = {
-      ...values,
-      [event.target.name]: event.target.value,
-    };
-    setValues(newItemState);
-    console.log(newItemState);
-  };
+  // const [profileImg, setProfileImg] = useState<any>(values.profile_photo);
+
+  // console.log(contact);
 
   const handleFile = (e: any) => {
-    const { profilePhoto } = e.target.files[0].name;
-    console.log(profilePhoto);
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        // setProfileImg(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
   };
 
-  const handleSelectChange = (event: any) => {
-    console.log(event.target.value);
-    setTe(event.target.value);
+  // const handleSelectChange = (event: any) => {
+  //   console.log(event.target.value);
+  //   setTe(event.target.value);
+  // };
+
+  const handleChange = (event: any) => {
+    // console.log(event.target.value);
+    const { name, value } = event.target;
+    setValues((values: any) => ({ ...values, [name]: value }));
   };
 
   useEffect(() => {
+    // getContact();
     getLabels();
   }, []);
 
@@ -51,25 +62,34 @@ function FormItem({ title, handleSubmit }: Props) {
 
   return (
     <form className="form-item__container" onSubmit={handleSubmit}>
-      <h3>{title}</h3>
+      <h3>Edit Contact</h3>
       <span>Photo</span>
       <div className="form-item__top">
         <div className="form-item__left">
-          <img src="" alt="contact" />
-          <button onChange={handleFile} type="button">
+          <img src={data?.profile_photo} alt="contact" />
+          <label>
+            <input
+              type="file"
+              onChange={handleFile}
+              name="profile_photo"
+              style={{ display: "none" }}
+              accept="image/*"
+            />
             Change
-            <input type="file" style={{ display: "none" }} />
-          </button>
+          </label>
         </div>
-        {/* <div className="form-item__labels"> */}
-        <select className="form-item__select" onChange={handleSelectChange}>
-          {labelList.map((label: Label) => (
+        <select
+          className="form-item__select"
+          onChange={handleChange}
+          name="label"
+          value={data?.label}
+        >
+          {labelList.map((label: any) => (
             <option key={label.id} value={label.name}>
-              {label.name}
+              {data?.label}
             </option>
           ))}
         </select>
-        {/* </div> */}
       </div>
       <label className="form-item__label">
         <span>Name:</span>
@@ -77,7 +97,7 @@ function FormItem({ title, handleSubmit }: Props) {
           type="text"
           name="name"
           onChange={handleChange}
-          value={values.name}
+          value={values?.name}
         />
       </label>
       <label className="form-item__label">
@@ -86,7 +106,7 @@ function FormItem({ title, handleSubmit }: Props) {
           type="text"
           name="email"
           onChange={handleChange}
-          value={values.email}
+          value={values?.email}
         />
       </label>
       <label className="form-item__label">
@@ -95,20 +115,20 @@ function FormItem({ title, handleSubmit }: Props) {
           type="text"
           name="phone_number"
           onChange={handleChange}
-          value={values.phone_number}
+          value={values?.phone_number}
         />
       </label>
       <div className="form-item__buttons">
         <Button
           buttonText="Cancel"
-          onClick={() => {}}
+          onClick={() => navigate("/")}
           type="button"
           className="white__button"
         />
         <Button
-          buttonText="Create"
-          onClick={() => handleSubmit(values, te)}
-          type="button"
+          buttonText="Save"
+          onClick={() => handleSubmit(data)}
+          type="submit"
           className="blue__button"
         />
       </div>

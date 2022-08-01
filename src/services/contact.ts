@@ -25,22 +25,27 @@ export const useContactById = (contactId?: any) => {
   return { contact, getContact };
 };
 
-export const saveNewContact = async (data: any, label: any) => {
+export const saveNewContact = async (data: any, profileImg: any) => {
   try {
-    await axios.post("http://localhost:3001/contacts", {
+    await axios.post(process.env.REACT_APP_API_URL + `/contacts`, {
       name: data.name,
       email: data.email,
       phone_number: data.phone_number,
       isFavorite: false,
-      label: { name: label },
+      profile_photo: profileImg,
+      label: data.label,
     });
   } catch (error: any) {
     console.log(error);
   }
 };
 
-export const getContactsByLabelName = async (name: string) => {
-  await axios.get(`http://localhost:3001/contacts?name=${name}`);
+export const getContactsByLabel = async (id: number) => {
+  await axios
+    .get(`http://localhost:3001/contacts?label=${id}`)
+    .then((response) => {
+      return response;
+    });
 };
 
 export const deleteSelectedContact = async (contactId: number) => {
@@ -56,5 +61,17 @@ export const addContactToFavorite = async (contactId: number) => {
 export const deleteContactFromFavorite = async (contactId: number) => {
   await axios.patch(process.env.REACT_APP_API_URL + `/contacts/${contactId}`, {
     isFavorite: false,
+  });
+};
+
+export const updateContact = async (contact: any) => {
+  console.log(contact);
+  await axios.put(process.env.REACT_APP_API_URL + `/contacts/${contact.id}`, {
+    name: contact.name,
+    email: contact.email,
+    phone_number: contact.phone_number,
+    isFavorite: contact.isFavorite,
+    profile_photo: contact.profile_photo,
+    label: contact.label,
   });
 };

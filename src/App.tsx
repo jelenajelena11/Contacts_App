@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import SearchBar from "./components/search-bar/SearchBar";
+// import SearchBar from "./components/search-bar/SearchBar";
 import Sidebar from "./components/sidebar/Sidebar";
 import ContactList from "./pages/all-contacts/ContactList";
 import CreateContact from "./pages/create-contact/CreateContact";
@@ -11,13 +11,19 @@ import "./App.scss";
 function App() {
   const [isDeletedContact, setIsDeletedContact] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isCreated, setIsCreated] = useState(false);
+  const [contactsByLabel, setContactsByLabel] = useState([]);
 
   return (
     <Router>
       <div className="app__container">
-        <Sidebar isDeletedContact={isDeletedContact} isFavorite={isFavorite} />
+        <Sidebar
+          isDeletedContact={isDeletedContact}
+          isFavorite={isFavorite}
+          isCreated={isCreated}
+          setContactsByLabel={setContactsByLabel}
+        />
         <div className="app__right_wrapper">
-          <SearchBar />
           <Routes>
             <Route
               path="/"
@@ -26,11 +32,20 @@ function App() {
                   setIsDeletedContact={setIsDeletedContact}
                   setIsFavorite={setIsFavorite}
                   isFavorite={isFavorite}
+                  contactsByLabel={contactsByLabel}
                 />
               }
             />
             <Route path="/edit-contact/:id" element={<EditContact />} />
-            <Route path="/create-contact" element={<CreateContact />} />
+            <Route
+              path="/create-contact"
+              element={
+                <CreateContact
+                  isCreated={isCreated}
+                  setIsCreated={setIsCreated}
+                />
+              }
+            />
             <Route
               path="/favorites"
               element={<Favorites setIsDeletedContact={setIsDeletedContact} />}

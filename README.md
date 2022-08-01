@@ -8,7 +8,7 @@ Contacts App is an application which demonstrates how you can build applications
 
 To run a json-server you need to go to the root folder (Contacts_App/) and run `npm run json:server`.
 <br />
-To run a project, go to the root folder (Contacts_App/) and run `npm start`. 
+To run a project, go to the root folder (Contacts_App/) and run `npm start`.
 
 ## The Stack
 
@@ -23,7 +23,6 @@ Contacts App was built using:
 - CRUD operations
 - Search function
 - Favourites
-
 
 ## About Me
 

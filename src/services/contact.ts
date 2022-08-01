@@ -64,14 +64,13 @@ export const deleteContactFromFavorite = async (contactId: number) => {
   });
 };
 
-export const updateContact = async (contact: any) => {
-  console.log(contact);
+export const updateContact = async (contact: any, profileImg: any) => {
   await axios.put(process.env.REACT_APP_API_URL + `/contacts/${contact.id}`, {
     name: contact.name,
     email: contact.email,
     phone_number: contact.phone_number,
     isFavorite: contact.isFavorite,
-    profile_photo: contact.profile_photo,
+    profile_photo: profileImg,
     label: contact.label,
   });
 };

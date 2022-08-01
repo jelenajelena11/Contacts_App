@@ -22,3 +22,14 @@ export const createLabel = async (label: Label) => {
     console.log(error);
   }
 };
+
+export const useLabelById = (labelId?: any) => {
+  const [label, setLabel] = useState<any>();
+  const getLabel = async () => {
+    const label = await axios.get(
+      process.env.REACT_APP_API_URL + `/labels/${labelId}`,
+    );
+    setLabel(label.data);
+  };
+  return { label, getLabel };
+};

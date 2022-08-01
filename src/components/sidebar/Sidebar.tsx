@@ -34,7 +34,6 @@ any) {
   const showContactsBasedOnLabel = (id: number) => {
     const t = getContactsByLabel(id);
     console.log(t);
-    // setContactsByLabel(t);
   };
 
   useEffect(() => {

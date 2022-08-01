@@ -1,13 +1,13 @@
 {
   "contacts": [
     {
-      "id": 1,
       "name": "Jane Cooper",
-      "email": "jane.cooper@example.com",
+      "email": "jane.cooper123@example.com",
       "phone_number": "+38160123456",
       "isFavorite": true,
       "profile_photo": "https://i.picsum.photos/id/680/200/300.jpg?hmac=OUdNxaSLxw8SgCxALPFPfZAurK6KVGLpU3hzbCrumJc",
-      "label": 1
+      "label": 1,
+      "id": 1
     },
     {
       "id": 3,
@@ -28,13 +28,13 @@
       "label": 3
     },
     {
-      "id": 6,
       "name": "Jack Williamson",
       "email": "jack.williamson@example.com",
       "phone_number": "+38160123456",
       "isFavorite": true,
-      "profile_photo": "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
-      "label": 2
+      "profile_photo": "data:image/png;base64,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",
+      "label": "5",
+      "id": 6
     }
   ],
   "labels": [

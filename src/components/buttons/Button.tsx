@@ -2,7 +2,7 @@ import "./Button.scss";
 
 interface Props {
   buttonText: string;
-  onClick: () => void;
+  onClick: any;
   type: "reset" | "button" | "submit";
   className: any;
 }

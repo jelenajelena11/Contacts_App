@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-// import { Label } from "../../interfaces/Label";
+// import { useNavigate } from "react-router-dom";
 import { useLabels } from "../../services/labels";
 import Button from "../buttons/Button";
 import "./FormItem.scss";
 import "../buttons/Button.scss";
 
-// interface Props {
-//   title: string;
-//   handleSubmit: any;
-// }
-
 function FormItem({ data, handleSubmit }: any) {
-  console.log(data);
-  // const { id } = useParams();
-  // const { contact, getContact } = useContactById(id);
   const { labelList, getLabels } = useLabels();
-  const navigate = useNavigate();
+  const [profileImg, setProfileImg] = useState<any>();
   const [values, setValues] = useState({
     name: data?.name || "",
     email: data?.email || "",
@@ -25,40 +16,31 @@ function FormItem({ data, handleSubmit }: any) {
     label: data?.label || 0,
   });
 
-  // const [profileImg, setProfileImg] = useState<any>(values.profile_photo);
-
-  // console.log(contact);
-
   const handleFile = (e: any) => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        // setProfileImg(reader.result);
+        setProfileImg(reader.result);
       }
     };
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  // const handleSelectChange = (event: any) => {
-  //   console.log(event.target.value);
-  //   setTe(event.target.value);
-  // };
-
   const handleChange = (event: any) => {
-    // console.log(event.target.value);
     const { name, value } = event.target;
     setValues((values: any) => ({ ...values, [name]: value }));
   };
 
-  useEffect(() => {
-    // getContact();
-    getLabels();
-  }, []);
+  const cancelEdit = (values: any) => {
+    console.log(values);
+  };
 
-  // const handleSubmit = (event: any) => {
-  //   event.preventDefault();
-  //   console.log(values);
-  // };
+  useEffect(() => {
+    getLabels();
+    // getLabel();
+    setValues(data);
+    setProfileImg(data?.profile_photo);
+  }, [data]);
 
   return (
     <form className="form-item__container" onSubmit={handleSubmit}>
@@ -66,7 +48,7 @@ function FormItem({ data, handleSubmit }: any) {
       <span>Photo</span>
       <div className="form-item__top">
         <div className="form-item__left">
-          <img src={data?.profile_photo} alt="contact" />
+          <img src={profileImg} alt="contact" />
           <label>
             <input
               type="file"
@@ -82,11 +64,11 @@ function FormItem({ data, handleSubmit }: any) {
           className="form-item__select"
           onChange={handleChange}
           name="label"
-          value={data?.label}
+          value={values?.label}
         >
           {labelList.map((label: any) => (
-            <option key={label.id} value={label.name}>
-              {data?.label}
+            <option key={label.id} value={label?.id}>
+              {label?.name}
             </option>
           ))}
         </select>
@@ -121,13 +103,13 @@ function FormItem({ data, handleSubmit }: any) {
       <div className="form-item__buttons">
         <Button
           buttonText="Cancel"
-          onClick={() => navigate("/")}
+          onClick={() => cancelEdit(values)}
           type="button"
           className="white__button"
         />
         <Button
           buttonText="Save"
-          onClick={() => handleSubmit(data)}
+          onClick={(event: any) => handleSubmit(values, event, profileImg)}
           type="submit"
           className="blue__button"
         />
